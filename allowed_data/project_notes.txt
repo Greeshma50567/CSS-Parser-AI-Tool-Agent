@@ -1,0 +1,4 @@
+# Engineering Notes 2026
+- Milestone 1: High-performance CSS Parser and AST generator with Groq AI integration.
+- Milestone 2: Deterministic AI Agent with 8 local tools and strict anti-hallucination.
+- Security: All file searches strictly restricted to allowed_data/ directory.

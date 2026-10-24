@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StyleScope AI — Intelligent CSS Parser & AI Code Auditor</title>
+  <meta name="description" content="Upload or write CSS stylesheets to instantly extract selectors, declarations, complexity metrics, and receive deep AI-powered architectural reviews via Groq LLM.">
+  <meta name="keywords" content="CSS Parser, Groq AI, CSS Auditor, CSS Analyzer, AST, Web Development Tools">
+  <meta name="author" content="StyleScope AI Team">
+  <meta name="theme-color" content="#0a0d14">
+
+  <!-- OpenGraph / Social Meta Tags -->
+  <meta property="og:title" content="StyleScope AI — Intelligent CSS Parser & AI Code Auditor">
+  <meta property="og:description" content="FastAPI & Groq-powered CSS parsing and code auditing platform.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/static/assets/logo.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="/static/assets/logo.jpg">
+
+  <!-- Google Fonts: Outfit (Display), Plus Jakarta Sans (UI), JetBrains Mono (Code) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <!-- Background Ambient Glow Effects -->
+  <div class="ambient-glow glow-1" aria-hidden="true"></div>
+  <div class="ambient-glow glow-2" aria-hidden="true"></div>
+  <div class="ambient-glow glow-3" aria-hidden="true"></div>
+
+  <!-- App Header -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <div class="brand-group">
+        <a href="/" class="brand-link" id="brand-link" title="StyleScope AI Home">
+          <img src="/static/assets/logo.jpg" alt="StyleScope AI Shield Logo" class="brand-logo" id="brand-logo" width="44" height="44">
+          <div class="brand-text">
+            <span class="brand-title">StyleScope <span class="brand-gradient">AI</span></span>
+            <span class="brand-subtitle">CSS Parser &amp; Groq Auditor</span>
+          </div>
+        </a>
+        <div class="badge-status-group">
+          <div class="status-pill" id="server-status-pill" title="Checking API status...">
+            <span class="status-dot pulsing" id="server-status-dot"></span>
+            <span class="status-label" id="server-status-label">Connecting...</span>
+          </div>
+          <div class="model-pill" id="model-pill" title="Powered by Groq AI">
+            <svg class="pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+            <span id="model-name-label">Groq LLaMA 3.3</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button class="nav-btn" id="docs-btn" title="View OpenAPI / Swagger Documentation" onclick="window.open('/docs', '_blank')">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+          <span class="hide-mobile">API Docs</span>
+        </button>
+
+        <button class="nav-btn" id="help-modal-trigger-btn" title="Architecture & Specs" aria-label="Open specification help">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+          <span class="hide-mobile">Specs</span>
+        </button>
+
+        <button class="theme-toggle-btn" id="theme-toggle-btn" title="Toggle Dark/Light Mode" aria-label="Toggle theme">
+          <svg class="theme-icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="theme-icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section" id="hero-section">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        <span>Milestone 1 Production Ready &bull; Fast Rule Extraction &bull; AI Code Review</span>
+      </div>
+      <h1 class="hero-title">
+        Intelligent CSS Parser <br class="hide-mobile">
+        <span class="gradient-text">&amp; AI Code Auditor</span>
+      </h1>
+      <p class="hero-subtitle">
+        Transform raw stylesheets into structured AST rules, inspect declaration complexity, handle URL edge-cases cleanly, and receive actionable AI audits powered by Groq.
+      </p>
+
+      <div class="hero-quick-actions">
+        <button class="btn btn-secondary btn-sm" id="quick-sample-btn" title="Load sample.css fixture">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 11 12 14 22 4"></polyline>
+            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+          </svg>
+          Load Sample CSS (14 Rules)
+        </button>
+        <span class="hero-feature-pill">Robust URL Splitting</span>
+        <span class="hero-feature-pill">Zero Regex Blowup</span>
+        <span class="hero-feature-pill">Groq AI Review</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Workspace -->
+  <main class="workspace-container" id="main-workspace">
+    <!-- Input Card Section -->
+    <section class="glass-card input-card" id="input-card">
+      <div class="card-header">
+        <div class="tabs-nav" role="tablist">
+          <button class="tab-btn active" id="tab-upload-btn" role="tab" aria-selected="true" aria-controls="panel-upload">
+            <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="17 8 12 3 7 8"></polyline>
+              <line x1="12" y1="3" x2="12" y2="15"></line>
+            </svg>
+            Upload .CSS File
+          </button>
+          <button class="tab-btn" id="tab-editor-btn" role="tab" aria-selected="false" aria-controls="panel-editor">
+            <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+            Live CSS Editor
+          </button>
+        </div>
+
+        <div class="input-header-tools">
+          <button class="btn btn-ghost btn-sm" id="clear-input-btn" title="Clear current input">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="3 6 5 6 21 6"></polyline>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+            </svg>
+            Clear
+          </button>
+        </div>
+      </div>
+
+      <!-- Tab Panel 1: File Upload -->
+      <div class="tab-panel active" id="panel-upload" role="tabpanel" aria-labelledby="tab-upload-btn">
+        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Drop CSS file here or click to browse">
+          <input type="file" id="file-input" accept=".css" class="visually-hidden">
+          <div class="dropzone-content" id="dropzone-empty-state">
+            <div class="dropzone-icon-wrap">
+              <svg class="dropzone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path>
+                <path d="M12 12v9"></path>
+                <path d="m16 16-4-4-4 4"></path>
+              </svg>
+            </div>
+            <h3 class="dropzone-title">Drop your CSS file here, or <span class="highlight-link">browse</span></h3>
+            <p class="dropzone-subtitle">Accepts standard <code>.css</code> files up to 10MB (UTF-8 encoded)</p>
+          </div>
+
+          <!-- File Loaded Card inside Dropzone -->
+          <div class="file-loaded-card hidden" id="file-loaded-state">
+            <div class="file-info-group">
+              <div class="file-icon-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                  <polyline points="13 2 13 9 20 9"></polyline>
+                </svg>
+              </div>
+              <div class="file-text-details">
+                <span class="loaded-filename" id="loaded-filename">sample.css</span>
+                <span class="loaded-filesize" id="loaded-filesize">2.4 KB</span>
+              </div>
+            </div>
+            <button class="btn btn-ghost btn-icon-only" id="remove-file-btn" title="Remove selected file">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Panel 2: Live Editor -->
+      <div class="tab-panel" id="panel-editor" role="tabpanel" aria-labelledby="tab-editor-btn">
+        <div class="code-editor-wrapper" id="code-editor-wrapper">
+          <div class="editor-header-bar">
+            <div class="editor-title-group">
+              <span class="editor-dot red"></span>
+              <span class="editor-dot yellow"></span>
+              <span class="editor-dot green"></span>
+              <span class="editor-filename">custom-input.css</span>
+            </div>
+            <div class="editor-stats-bar">
+              <span id="editor-line-count">1 line</span>
+              <span class="editor-separator">&bull;</span>
+              <span id="editor-char-count">0 chars</span>
+              <button class="editor-tool-btn" id="format-css-btn" title="Clean &amp; auto-indent CSS">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="21" y1="10" x2="7" y2="10"></line>
+                  <line x1="21" y1="6" x2="3" y2="6"></line>
+                  <line x1="21" y1="14" x2="3" y2="14"></line>
+                  <line x1="21" y1="18" x2="7" y2="18"></line>
+                </svg>
+                Format
+              </button>
+            </div>
+          </div>
+          <div class="editor-body">
+            <div class="editor-gutter" id="editor-gutter" aria-hidden="true">1</div>
+            <textarea
+              class="code-textarea"
+              id="css-code-editor"
+              placeholder="/* Paste or write your CSS declarations here... */&#10;body {&#10;    margin: 0;&#10;    padding: 0;&#10;    font-family: 'Inter', sans-serif;&#10;}&#10;&#10;.hero {&#10;    background: url('https://example.com/banner.jpg') no-repeat center;&#10;    display: flex;&#10;}"
+              spellcheck="false"
+              autocomplete="off"
+              autocorrect="off"
+              autocapitalize="off"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Execution Bar -->
+      <div class="action-footer">
+        <div class="action-status-info" id="action-status-bar">
+          <span class="status-indicator-icon" id="action-spinner" style="display:none;"></span>
+          <span class="status-message" id="action-status-message">Ready to parse. Select a file or paste CSS above.</span>
+        </div>
+
+        <div class="action-buttons-group">
+          <button class="btn btn-outline" id="parse-btn" title="Fast local parse into selectors and property dicts">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+            <span>Parse Rules</span>
+          </button>
+
+          <button class="btn btn-primary" id="analyze-btn" title="Parse CSS and run deep AI review with Groq LLM">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+            </svg>
+            <span>Analyze with Groq AI</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Metrics Dashboard Row -->
+    <section class="metrics-dashboard hidden" id="metrics-dashboard" aria-label="Parsing Metrics Summary">
+      <div class="metric-card">
+        <div class="metric-icon-wrap icon-indigo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="3" y1="9" x2="21" y2="9"></line>
+            <line x1="9" y1="21" x2="9" y2="9"></line>
+          </svg>
+        </div>
+        <div class="metric-body">
+          <span class="metric-label">Total Rules</span>
+          <span class="metric-value" id="metric-total-rules">0</span>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon-wrap icon-cyan">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 7V4h16v3M9 20h6M12 4v16"></path>
+          </svg>
+        </div>
+        <div class="metric-body">
+          <span class="metric-label">Total Declarations</span>
+          <span class="metric-value" id="metric-total-props">0</span>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon-wrap icon-violet">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="6" x2="12" y2="12"></line>
+            <line x1="12" y1="12" x2="16" y2="14"></line>
+          </svg>
+        </div>
+        <div class="metric-body">
+          <span class="metric-label">Avg Props / Rule</span>
+          <span class="metric-value" id="metric-avg-props">0.0</span>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon-wrap icon-amber">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+        </div>
+        <div class="metric-body">
+          <span class="metric-label">Max Complexity</span>
+          <span class="metric-value" id="metric-max-props">0 props</span>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon-wrap icon-emerald">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+        </div>
+        <div class="metric-body">
+          <span class="metric-label">Execution Time</span>
+          <span class="metric-value" id="metric-time">0 ms</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI Review Section -->
+    <section class="glass-card ai-review-card hidden" id="ai-review-section">
+      <div class="ai-card-banner">
+        <div class="ai-banner-title-group">
+          <div class="ai-sparkle-badge">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2L14.4 8.6L21 11L14.4 13.4L12 20L9.6 13.4L3 11L9.6 8.6L12 2Z"/>
+            </svg>
+          </div>
+          <div>
+            <h2 class="ai-section-title">Groq AI Architectural Review</h2>
+            <p class="ai-section-subtitle">Evaluated by <code id="ai-model-tag">openai/gpt-oss-120b</code> against production CSS standards</p>
+          </div>
+        </div>
+
+        <div class="ai-banner-actions">
+          <button class="btn btn-ghost btn-sm" id="copy-ai-btn" title="Copy full AI review to clipboard">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span>Copy Review</span>
+          </button>
+          <button class="btn btn-ghost btn-sm" id="export-ai-md-btn" title="Download AI Review as Markdown">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>Export MD</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- AI Executive Summary Banner -->
+      <div class="ai-summary-box">
+        <div class="summary-label">Executive Summary</div>
+        <p class="summary-text" id="ai-summary-text">
+          Analyzing stylesheet rules...
+        </p>
+      </div>
+
+      <!-- 3 Pillars Grid -->
+      <div class="ai-pillars-grid">
+        <!-- Pillar 1: Actionable Suggestions -->
+        <div class="ai-pillar-card pillar-suggestions">
+          <div class="pillar-header">
+            <div class="pillar-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 18h6M10 22h4M12 2v1M12 17a5 5 0 1 0-5-5c0 1.66.81 3.13 2.05 4.05L12 17z"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="pillar-title">Actionable Improvements</h3>
+              <span class="pillar-counter" id="suggestions-count">0 items</span>
+            </div>
+          </div>
+          <ul class="pillar-list" id="ai-suggestions-list">
+            <li class="pillar-skeleton"></li>
+            <li class="pillar-skeleton"></li>
+          </ul>
+        </div>
+
+        <!-- Pillar 2: Accessibility -->
+        <div class="ai-pillar-card pillar-a11y">
+          <div class="pillar-header">
+            <div class="pillar-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="4" r="2"></circle>
+                <path d="M18 9l-6 2-6-2M12 11v10M8 21l4-3 4 3"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="pillar-title">Accessibility (a11y)</h3>
+              <span class="pillar-counter" id="a11y-count">0 items</span>
+            </div>
+          </div>
+          <ul class="pillar-list" id="ai-accessibility-list">
+            <li class="pillar-skeleton"></li>
+            <li class="pillar-skeleton"></li>
+          </ul>
+        </div>
+
+        <!-- Pillar 3: Best Practices -->
+        <div class="ai-pillar-card pillar-best-practices">
+          <div class="pillar-header">
+            <div class="pillar-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                <polyline points="9 12 11 14 15 10"></polyline>
+              </svg>
+            </div>
+            <div>
+              <h3 class="pillar-title">CSS Best Practices</h3>
+              <span class="pillar-counter" id="best-practices-count">0 items</span>
+            </div>
+          </div>
+          <ul class="pillar-list" id="ai-best-practices-list">
+            <li class="pillar-skeleton"></li>
+            <li class="pillar-skeleton"></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Parsed Rules Explorer Section -->
+    <section class="glass-card rules-card hidden" id="rules-section">
+      <div class="rules-header">
+        <div class="rules-title-group">
+          <h2 class="rules-section-title">Parsed CSS Rules Explorer</h2>
+          <span class="rules-counter-badge" id="visible-rules-count">0 Rules</span>
+        </div>
+
+        <div class="rules-tools-group">
+          <!-- Search Box -->
+          <div class="search-box">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" id="rule-search-input" placeholder="Filter selectors or properties..." aria-label="Search selectors and properties">
+            <button class="clear-search-btn hidden" id="clear-search-btn" title="Clear search">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Sort Select -->
+          <div class="select-wrapper">
+            <select id="rule-sort-select" aria-label="Sort rules">
+              <option value="original">Order: Default (File)</option>
+              <option value="desc-props">Complexity: Most Props</option>
+              <option value="asc-props">Complexity: Fewest Props</option>
+              <option value="alpha-selector">Selector: A to Z</option>
+            </select>
+          </div>
+
+          <!-- View Toggle Buttons -->
+          <div class="view-toggle-group">
+            <button class="view-btn active" id="view-cards-btn" title="Cards View" aria-label="Cards view">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+              </svg>
+            </button>
+            <button class="view-btn" id="view-table-btn" title="Table View" aria-label="Table view">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+              </svg>
+            </button>
+            <button class="view-btn" id="view-json-btn" title="Raw JSON Tree View" aria-label="JSON view">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="4 7 4 4 20 4 20 7"></polyline>
+                <line x1="9" y1="20" x2="15" y2="20"></line>
+                <line x1="12" y1="4" x2="12" y2="20"></line>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Export JSON Button -->
+          <button class="btn btn-outline btn-sm" id="export-json-btn" title="Download parsed rules JSON">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>Export JSON</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Category Filter Pills -->
+      <div class="category-filters-bar" id="category-filters-bar">
+        <span class="filter-label">Quick Filters:</span>
+        <button class="filter-pill active" data-filter="all">All</button>
+        <button class="filter-pill" data-filter="layout">Layout (Flex/Grid)</button>
+        <button class="filter-pill" data-filter="colors">Colors &amp; Bg</button>
+        <button class="filter-pill" data-filter="typography">Typography</button>
+        <button class="filter-pill" data-filter="spacing">Margin &amp; Padding</button>
+        <button class="filter-pill" data-filter="pseudo">Pseudo (:hover)</button>
+        <button class="filter-pill" data-filter="media">Media Queries</button>
+      </div>
+
+      <!-- Container A: Rule Cards View -->
+      <div class="rules-cards-grid" id="rules-cards-container">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <!-- Container B: Rule Table View -->
+      <div class="rules-table-wrapper hidden" id="rules-table-container">
+        <table class="rules-table">
+          <thead>
+            <tr>
+              <th scope="col" style="width: 50px;">#</th>
+              <th scope="col">Selector</th>
+              <th scope="col" style="width: 120px;">Declarations</th>
+              <th scope="col">Properties Summary</th>
+              <th scope="col" style="width: 80px;">Action</th>
+            </tr>
+          </thead>
+          <tbody id="rules-table-body">
+            <!-- Rendered dynamically -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Container C: Raw JSON View -->
+      <div class="rules-json-wrapper hidden" id="rules-json-container">
+        <div class="json-toolbar">
+          <span class="json-status">Structured AST Response</span>
+          <button class="btn btn-ghost btn-sm" id="copy-json-btn">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            Copy JSON
+          </button>
+        </div>
+        <pre class="json-code-block"><code id="raw-json-output">// Parsed rules will appear here...</code></pre>
+      </div>
+
+      <!-- Empty Filter State -->
+      <div class="empty-rules-state hidden" id="empty-rules-state">
+        <div class="empty-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </div>
+        <h3>No matching rules found</h3>
+        <p>Try clearing your search query or switching the category filter.</p>
+        <button class="btn btn-secondary btn-sm" id="reset-filter-btn">Reset Filters</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Help & Specs Modal -->
+  <div class="modal-backdrop hidden" id="help-modal" role="dialog" aria-modal="true" aria-labelledby="help-modal-title">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <svg class="modal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+          <h2 id="help-modal-title">Milestone 1 Specification &amp; Architecture</h2>
+        </div>
+        <button class="modal-close-btn" id="modal-close-btn" aria-label="Close modal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="spec-section">
+          <h3>1. What is Extracted &amp; Why</h3>
+          <ul>
+            <li><strong>Selector(s):</strong> Identifies precisely which DOM elements are targeted (e.g. <code>.navbar</code>, <code>h1, h2</code>, <code>.hero</code>).</li>
+            <li><strong>Properties (Key-Value Dict):</strong> Declarations captured as a dictionary (e.g. <code>{"color": "#333", "display": "flex"}</code>) for immediate programmatic querying.</li>
+            <li><strong>Property Count:</strong> Complexity indicator representing declaration density without requiring client iteration.</li>
+          </ul>
+        </div>
+
+        <div class="spec-section">
+          <h3>2. Edge Case Handled: URL Values with Colons</h3>
+          <p>
+            Standard naïve splits on <code>:</code> corrupt declarations like:
+            <code>background: url('https://example.com/hero.jpg')</code>.
+            The parser uses <code>split(':', 1)</code> to safely split on the <em>first</em> colon only, keeping web URLs completely intact.
+          </p>
+        </div>
+
+        <div class="spec-section">
+          <h3>3. Groq AI Integration</h3>
+          <p>
+            Parsed rules are structured and reviewed by the Groq LLM (<code>openai/gpt-oss-120b</code>) with deterministic output returning exactly:
+          </p>
+          <div class="spec-code-pill">
+            <code>{"summary": "...", "suggestions": [...], "accessibility": [...], "best_practices": [...]}</code>
+          </div>
+        </div>
+
+        <div class="spec-section">
+          <h3>4. API Endpoints Available</h3>
+          <div class="endpoints-table">
+            <div class="ep-row"><span class="ep-badge get">GET</span> <code>/</code> or <code>/api/health</code> <span class="ep-desc">Liveness probe / Frontend</span></div>
+            <div class="ep-row"><span class="ep-badge post">POST</span> <code>/parse-css</code> <span class="ep-desc">Upload .css file &rarr; JSON rules</span></div>
+            <div class="ep-row"><span class="ep-badge post">POST</span> <code>/analyze-css</code> <span class="ep-desc">Upload .css file &rarr; JSON rules + Groq AI review</span></div>
+            <div class="ep-row"><span class="ep-badge post">POST</span> <code>/parse-css-text</code> <span class="ep-desc">Raw CSS payload &rarr; JSON rules</span></div>
+            <div class="ep-row"><span class="ep-badge post">POST</span> <code>/analyze-css-text</code> <span class="ep-desc">Raw CSS payload &rarr; JSON rules + Groq AI review</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary btn-sm" id="modal-ack-btn">Got It</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notifications Container -->
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <img src="/static/assets/logo.jpg" alt="StyleScope AI Logo" class="footer-logo" width="28" height="28">
+        <span>StyleScope AI &bull; Milestone 1 CSS Parser &amp; Groq Auditor</span>
+      </div>
+      <div class="footer-right">
+        <a href="/docs" target="_blank" rel="noopener noreferrer">FastAPI Swagger</a>
+        <span class="footer-sep">&bull;</span>
+        <a href="/redoc" target="_blank" rel="noopener noreferrer">ReDoc</a>
+        <span class="footer-sep">&bull;</span>
+        <span class="footer-version">v1.2.0</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- App Script -->
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,362 @@
+[
+  {
+    "id": "DOC-001",
+    "title": "Hardware Catalog: PRD-101 Ultra-Glide Mechanical Keyboard",
+    "category": "Products",
+    "source": "Catalog v2.4 (2026)",
+    "keywords": [
+      "prd-101",
+      "keyboard",
+      "mechanical",
+      "price",
+      "stock",
+      "ultra-glide"
+    ],
+    "content": "Product ID: PRD-101. Name: Ultra-Glide Mechanical Keyboard. Price: $129.99 USD. Stock: 42 units in stock. Category: Peripherals. Dimensions: 440 x 135 x 35 mm. Weight: 980 grams. Features: RGB per-key backlighting, hot-swappable tactile switches, USB-C braided cable."
+  },
+  {
+    "id": "DOC-002",
+    "title": "Hardware Catalog: PRD-102 Precision Optics 4K Webcam",
+    "category": "Products",
+    "source": "Catalog v2.4 (2026)",
+    "keywords": [
+      "prd-102",
+      "webcam",
+      "camera",
+      "4k",
+      "precision",
+      "price",
+      "stock"
+    ],
+    "content": "Product ID: PRD-102. Name: Precision Optics 4K Webcam. Price: $189.50 USD. Stock: 15 units in stock. Category: Video Equipment. Dimensions: 102 x 27 x 27 mm. Weight: 165 grams. Features: Dual noise-reduction microphones, autofocus glass lens, privacy shutter."
+  },
+  {
+    "id": "DOC-003",
+    "title": "Hardware Catalog: PRD-103 ErgoDynamic Lumbar Mesh Chair",
+    "category": "Products",
+    "source": "Catalog v2.4 (2026)",
+    "keywords": [
+      "prd-103",
+      "chair",
+      "ergodynamic",
+      "mesh",
+      "furniture",
+      "price",
+      "stock"
+    ],
+    "content": "Product ID: PRD-103. Name: ErgoDynamic Lumbar Mesh Chair. Price: $349.00 USD. Stock: 0 units (Currently Out of Stock, backorder expected in 3 weeks). Category: Furniture. Dimensions: 650 x 650 x 1150 mm. Weight: 14.2 kg."
+  },
+  {
+    "id": "DOC-004",
+    "title": "Customer Return and Refund Policy",
+    "category": "Policies",
+    "source": "Corporate Policy Handbook Section 4.2",
+    "keywords": [
+      "return",
+      "refund",
+      "exchange",
+      "policy",
+      "days",
+      "satisfaction"
+    ],
+    "content": "Customers are eligible for a full refund or exchange within 30 days of delivery. Items must be returned in their original packaging with all included accessories. Perishable goods and customized items are non-refundable. Return shipping is free for defective merchandise."
+  },
+  {
+    "id": "DOC-005",
+    "title": "Global Warranty Coverage Guidelines",
+    "category": "Policies",
+    "source": "Corporate Policy Handbook Section 5.1",
+    "keywords": [
+      "warranty",
+      "coverage",
+      "repair",
+      "defect",
+      "guarantee"
+    ],
+    "content": "All hardware products include a standard 2-year limited manufacturer warranty covering component defects and workmanship failure under normal usage. The warranty excludes damage caused by liquid spills, unauthorized disassembly, or third-party electrical surge."
+  },
+  {
+    "id": "DOC-006",
+    "title": "Customer Support Operating Hours & Channels",
+    "category": "Operations",
+    "source": "Support Operations SLA 2026",
+    "keywords": [
+      "support",
+      "hours",
+      "contact",
+      "email",
+      "phone",
+      "helpdesk"
+    ],
+    "content": "Live customer support is available Monday through Friday from 08:00 to 20:00 EST. Weekend support operates via email (support@example.com) from 10:00 to 16:00 EST with a guaranteed first-response turnaround time under 4 hours."
+  },
+  {
+    "id": "DOC-007",
+    "title": "Enterprise Security Protocols and Data Retention",
+    "category": "Security",
+    "source": "InfoSec Compliance Document v3.1",
+    "keywords": [
+      "security",
+      "retention",
+      "privacy",
+      "gdpr",
+      "encryption",
+      "tls"
+    ],
+    "content": "All sensitive customer credentials and personal data are encrypted at rest using AES-256 and in transit via TLS 1.3. Server logs undergo automatic aggregation and rotation with a retention limit of 90 days. Raw API keys are never stored in source repositories."
+  },
+  {
+    "id": "PROG-PY-001",
+    "title": "Python: GIL (Global Interpreter Lock) & Concurrency",
+    "category": "Python",
+    "source": "Python Official Documentation & PEP 703",
+    "keywords": [
+      "python",
+      "gil",
+      "concurrency",
+      "multithreading",
+      "multiprocessing",
+      "asyncio",
+      "thread"
+    ],
+    "content": "The Global Interpreter Lock (GIL) is a mutex in CPython that prevents multiple native threads from executing Python bytecode simultaneously. For CPU-bound tasks, multithreading does not achieve true parallelism in CPython; instead, the `multiprocessing` module is recommended to bypass the GIL by spawning separate processes with independent memory spaces. For I/O-bound tasks (network requests, file I/O, database queries), Python's `asyncio` cooperative multitasking or standard threads release the GIL during I/O wait, providing high concurrent throughput."
+  },
+  {
+    "id": "PROG-PY-002",
+    "title": "Python: Memory Management & Garbage Collection",
+    "category": "Python",
+    "source": "Python Internals Architecture Guide",
+    "keywords": [
+      "python",
+      "memory",
+      "garbage collection",
+      "reference counting",
+      "cyclical",
+      "gc"
+    ],
+    "content": "CPython manages memory primarily through reference counting supplemented by a generational cyclic garbage collector. Every object has a reference count (`ob_refcnt`). When an object's reference count drops to zero, its memory is immediately deallocated. To handle reference cycles (where objects reference each other and cannot reach zero count), Python uses a 3-generation cyclic garbage collector (Generation 0, 1, 2) based on heuristic collection frequencies. Memory allocation for small objects (<= 512 bytes) is optimized via PyMalloc into Arenas (256KB), Pools (4KB), and Blocks."
+  },
+  {
+    "id": "PROG-PY-003",
+    "title": "Python: Decorators, Generators, and Context Managers",
+    "category": "Python",
+    "source": "Python Advanced Language Reference",
+    "keywords": [
+      "python",
+      "decorator",
+      "generator",
+      "yield",
+      "context manager",
+      "with"
+    ],
+    "content": "Decorators in Python are higher-order functions that take a function as an argument and return a wrapped function, often implemented with `functools.wraps`. Generators use the `yield` keyword to produce values lazily on demand, maintaining state between invocations without storing entire sequences in memory (O(1) space). Context managers implement the `__enter__` and `__exit__` dunder methods (or `@contextlib.contextmanager`), ensuring reliable resource allocation and cleanup (such as file closing or database locks) even if unhandled exceptions occur."
+  },
+  {
+    "id": "PROG-JS-001",
+    "title": "JavaScript: Event Loop, Microtasks & Macrotasks",
+    "category": "JavaScript",
+    "source": "MDN Web Docs & V8 Engine Architecture",
+    "keywords": [
+      "javascript",
+      "event loop",
+      "microtask",
+      "macrotask",
+      "promise",
+      "settimeout",
+      "async"
+    ],
+    "content": "JavaScript is single-threaded and executes synchronous code on the Call Stack. Asynchronous tasks are scheduled into two task queues: Microtask Queue (Promises, `queueMicrotask`, `process.nextTick`, MutationObserver) and Macrotask Queue (`setTimeout`, `setInterval`, `setImmediate`, I/O). After completing each synchronous stack frame, the Event Loop empties the ENTIRE Microtask Queue before processing the next single Macrotask. Therefore, resolved Promise `.then()` callbacks always execute before pending `setTimeout` callbacks."
+  },
+  {
+    "id": "PROG-JS-002",
+    "title": "JavaScript & TypeScript: Closures and Prototypal Inheritance",
+    "category": "JavaScript",
+    "source": "ECMAScript Language Specification",
+    "keywords": [
+      "javascript",
+      "typescript",
+      "closure",
+      "prototype",
+      "scope",
+      "lexical"
+    ],
+    "content": "A closure is the combination of a function bundled together with references to its lexical environment, allowing an inner function to access an outer function's scope even after the outer function has returned. Prototypal inheritance allows objects to inherit properties directly from other objects via the prototype chain (`__proto__` / `Object.getPrototypeOf`). ES6 `class` syntax is syntactic sugar over prototypal inheritance. TypeScript adds static type checking, interfaces, discriminated unions, and compile-time generics over standard JavaScript."
+  },
+  {
+    "id": "PROG-REACT-001",
+    "title": "React: Virtual DOM, Reconciliation & Fiber Architecture",
+    "category": "React",
+    "source": "React Core Architecture Documentation",
+    "keywords": [
+      "react",
+      "virtual dom",
+      "reconciliation",
+      "fiber",
+      "diffing",
+      "render"
+    ],
+    "content": "React uses an in-memory representation of the UI called the Virtual DOM (VDOM). When state or props change, React renders a new virtual tree and uses its reconciliation algorithm (React Fiber) to compute the minimal set of real DOM mutations. The diffing algorithm has O(n) complexity using heuristics: elements of different types produce different trees, and lists utilize unique `key` props to identify which items have been inserted, updated, or reordered without tearing down entire DOM subtrees."
+  },
+  {
+    "id": "PROG-REACT-002",
+    "title": "React: Hooks Lifecycle & Rules (useState, useEffect, useMemo, useCallback, useRef)",
+    "category": "React",
+    "source": "Official React Documentation",
+    "keywords": [
+      "react",
+      "hooks",
+      "usestate",
+      "useeffect",
+      "usememo",
+      "usecallback",
+      "useref"
+    ],
+    "content": "React Hooks let function components manage state and side effects. `useState` manages local reactive state. `useEffect` handles side-effects (network requests, subscriptions, DOM mutations) after render, with dependency arrays controlling re-execution. `useMemo` caches the result of expensive computations. `useCallback` memoizes function instances to prevent unnecessary child re-renders. `useRef` maintains a mutable reference that persists across renders without triggering a re-render. Rules of Hooks: 1. Only call hooks at the top level (never in loops/conditions). 2. Only call hooks from React function components or custom hooks."
+  },
+  {
+    "id": "PROG-API-001",
+    "title": "FastAPI: ASGI, Dependency Injection & Pydantic Validation",
+    "category": "Backend",
+    "source": "FastAPI & Starlette Documentation",
+    "keywords": [
+      "fastapi",
+      "asgi",
+      "pydantic",
+      "depends",
+      "dependency injection",
+      "uvicorn",
+      "async"
+    ],
+    "content": "FastAPI is a modern Python web framework built on Starlette (for ASGI routing) and Pydantic (for data validation and serialization). It runs on asynchronous servers like Uvicorn using Python type hints to generate OpenAPI (Swagger) documentation automatically. FastAPI's Dependency Injection system (`Depends`) manages database sessions, authentication, and shared logic cleanly. Path operations can be defined with `async def` for non-blocking I/O or standard `def` which FastAPI offloads to an external threadpool."
+  },
+  {
+    "id": "PROG-DSA-001",
+    "title": "Data Structures & Algorithms: Big-O Complexity Cheat Sheet",
+    "category": "Algorithms",
+    "source": "Introduction to Algorithms (CLRS)",
+    "keywords": [
+      "dsa",
+      "big o",
+      "complexity",
+      "time complexity",
+      "space complexity",
+      "algorithms"
+    ],
+    "content": "Big-O notation describes the upper bound of execution time or memory space as input size n grows: O(1) Constant (Hash table lookup, array index access); O(log n) Logarithmic (Binary search in sorted array, balanced BST operations); O(n) Linear (Linear search, array traversal); O(n log n) Linearithmic (Merge Sort, Quick Sort average, Heap Sort, Timsort); O(n^2) Quadratic (Bubble Sort, Insertion Sort, nested loops); O(2^n) Exponential (Recursive Fibonacci without memoization); O(n!) Factorial (Traveling Salesperson brute force, permutations)."
+  },
+  {
+    "id": "PROG-DSA-002",
+    "title": "Data Structures: Hash Tables, Trees & Graphs",
+    "category": "Algorithms",
+    "source": "Computer Science Core Curriculum",
+    "keywords": [
+      "data structures",
+      "hash table",
+      "hash map",
+      "binary search tree",
+      "graph",
+      "bfs",
+      "dfs",
+      "heap"
+    ],
+    "content": "Hash Tables map keys to values using hash functions with O(1) average lookup/insert time, resolving collisions via chaining (linked lists/red-black trees) or open addressing (linear/quadratic probing). Binary Search Trees (BST) maintain sorted order with O(log n) average search/insert, balanced by AVL or Red-Black trees. Heaps (Min/Max) are complete binary trees providing O(1) access to extremes and O(log n) extraction. Graphs consist of vertices and edges, traversed using Breadth-First Search (BFS, using Queue for shortest paths in unweighted graphs) and Depth-First Search (DFS, using Stack/recursion for cycle detection and topological sorting)."
+  },
+  {
+    "id": "PROG-DB-001",
+    "title": "Databases: SQL Joins & Query Mechanics",
+    "category": "Databases",
+    "source": "Database System Concepts Guide",
+    "keywords": [
+      "sql",
+      "database",
+      "join",
+      "inner join",
+      "left join",
+      "right join",
+      "outer join"
+    ],
+    "content": "SQL Joins combine records from multiple tables based on related columns: 1. INNER JOIN: Returns rows where a match exists in both tables. 2. LEFT JOIN (LEFT OUTER JOIN): Returns all rows from the left table and matching rows from the right table; unmatched right attributes become NULL. 3. RIGHT JOIN: Returns all rows from the right table and matching rows from the left table. 4. FULL OUTER JOIN: Returns all rows when there is a match in either left or right table. 5. CROSS JOIN: Returns the Cartesian product of rows from both tables."
+  },
+  {
+    "id": "PROG-DB-002",
+    "title": "Databases: ACID Properties & Indexing",
+    "category": "Databases",
+    "source": "Relational Database Internals",
+    "keywords": [
+      "database",
+      "acid",
+      "transactions",
+      "indexing",
+      "b-tree",
+      "atomicity",
+      "isolation"
+    ],
+    "content": "ACID guarantees reliable transactions: Atomicity (all operations succeed or entire transaction is rolled back); Consistency (transactions preserve database constraints and valid state); Isolation (concurrent transactions execute independently without interference, controlled by isolation levels: Read Uncommitted, Read Committed, Repeatable Read, Serializable); Durability (committed data survives system crashes via write-ahead logging). Database Indexes use B-Trees or B+Trees to provide O(log n) search, range scans, and sorting at the cost of additional storage and write overhead."
+  },
+  {
+    "id": "PROG-SEC-001",
+    "title": "Web Security: CORS, CSRF, XSS & SQL Injection",
+    "category": "Security",
+    "source": "OWASP Top 10 Security Guidelines",
+    "keywords": [
+      "security",
+      "cors",
+      "csrf",
+      "xss",
+      "sql injection",
+      "owasp",
+      "jwt"
+    ],
+    "content": "Web Security Essentials: 1. CORS (Cross-Origin Resource Sharing): A browser security mechanism that restricts web applications from making requests to a different domain/port unless authorized via `Access-Control-Allow-Origin` headers. 2. XSS (Cross-Site Scripting): Injection of malicious client-side scripts into web pages; mitigated by output encoding, Content Security Policy (CSP), and React's automatic JSX escaping. 3. CSRF (Cross-Site Request Forgery): Unauthorized commands transmitted from a trusted user; mitigated using SameSite cookies and Anti-CSRF tokens. 4. SQL Injection: Malicious SQL queries executed via unsanitized input; completely prevented by parameterized queries (prepared statements) and ORMs."
+  },
+  {
+    "id": "PROG-API-002",
+    "title": "API Design: RESTful Standards, HTTP Methods & Status Codes",
+    "category": "System Design",
+    "source": "HTTP/1.1 Specification (RFC 9110)",
+    "keywords": [
+      "rest",
+      "api",
+      "http",
+      "status codes",
+      "get",
+      "post",
+      "put",
+      "patch",
+      "delete"
+    ],
+    "content": "REST (Representational State Transfer) structures APIs around resource endpoints using standard HTTP methods: GET (read, safe & idempotent), POST (create, non-idempotent), PUT (full replacement, idempotent), PATCH (partial update), DELETE (remove, idempotent). Status Codes: 200 OK, 201 Created, 204 No Content; 301 Moved Permanently, 304 Not Modified; 400 Bad Request, 401 Unauthorized (unauthenticated), 403 Forbidden (insufficient permissions), 404 Not Found, 422 Unprocessable Entity; 500 Internal Server Error, 502 Bad Gateway, 503 Service Unavailable."
+  },
+  {
+    "id": "PROG-GIT-001",
+    "title": "Git: Rebase vs Merge, Branching & Merge Conflicts",
+    "category": "Software Engineering",
+    "source": "Pro Git Book & Version Control Standards",
+    "keywords": [
+      "git",
+      "rebase",
+      "merge",
+      "branch",
+      "commit",
+      "conflict",
+      "cherry-pick"
+    ],
+    "content": "In Git, `git merge` combines branches by creating a new merge commit preserving complete branch history and context. `git rebase` rewrites commit history by moving a sequence of commits to a new base commit, creating a clean linear project history. Golden rule of rebasing: Never rebase commits that exist outside your repository and that people may have based work on. `git cherry-pick <commit>` applies specific commits from another branch. Merge conflicts occur when divergent changes modify the same lines and must be manually resolved."
+  },
+  {
+    "id": "PROG-SE-001",
+    "title": "Software Engineering: SOLID Principles & Design Patterns",
+    "category": "Software Engineering",
+    "source": "Clean Architecture & Design Patterns (GoF)",
+    "keywords": [
+      "solid",
+      "design patterns",
+      "oop",
+      "clean code",
+      "singleton",
+      "factory",
+      "observer"
+    ],
+    "content": "The SOLID Principles: Single Responsibility Principle (a class/module should have only one reason to change); Open/Closed Principle (open for extension, closed for modification); Liskov Substitution Principle (subtypes must be substitutable for base types); Interface Segregation Principle (clients should not depend on interfaces they do not use); Dependency Inversion Principle (depend on abstractions, not concretions). Key Design Patterns: Singleton (single instance), Factory (object creation encapsulation), Observer (pub/sub event system), Strategy (interchangeable algorithms)."
+  }
+]
